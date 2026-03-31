@@ -1,6 +1,6 @@
 import SearchBar from "./SearchBar";
 
-const NavBar = ({ setActivePage }) => {
+const NavBar = ({ setActivePage, s, sS }) => {
   return (
     <nav className="bg-indigo-600 text-white shadow-md">
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
@@ -8,7 +8,7 @@ const NavBar = ({ setActivePage }) => {
           Pokémon Explorer
         </h1>
         <div>
-          <SearchBar/>
+          <SearchBar search={s} setSearch={sS} />
         </div>
         <ul className="flex space-x-6">
           <li

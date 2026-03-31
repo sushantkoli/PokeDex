@@ -9,66 +9,66 @@ import NavBar from './assets/Components/NavBar';
 import About from './assets/Components/About';
 
 function App() {
- const [ApiData, setApiData] = useState([]);
- const [ApiLink, setApiLink]=useState("https://pokeapi.co/api/v2/pokemon?offset=0&limit=20")
- const [NextUrl, setNextUrl]=useState(null)
- const [PrevUrl, setPrevUrl]=useState(null) 
- const [loading, setloading]=useState(false)
- const [search] = useState("");
- const [activePage, setActivePage] = useState('home');
+  const [ApiData, setApiData] = useState([]);
+  const [ApiLink, setApiLink] = useState("https://pokeapi.co/api/v2/pokemon?offset=0&limit=20")
+  const [NextUrl, setNextUrl] = useState(null)
+  const [PrevUrl, setPrevUrl] = useState(null)
+  const [loading, setloading] = useState(false)
+  const [search, setSearch] = useState("");
+  const [activePage, setActivePage] = useState('home');
 
 
 
-   useEffect(()=>{
-    const getData= async ()=>{
+  useEffect(() => {
+    const getData = async () => {
       setloading(true)
-      const response= await axios.get(ApiLink)
+      const response = await axios.get(ApiLink)
       //Stored Array of pokemon name and url
-      const PokemResult=response.data.results
+      const PokemResult = response.data.results
       setNextUrl(response.data.next)
       setPrevUrl(response.data.previous)
       //Extracting all details in array
-      const pokemonDetailPromises=PokemResult.map((array)=> axios.get(array.url))
-      const pokemonDetails=await axios.all(pokemonDetailPromises);
+      const pokemonDetailPromises = PokemResult.map((array) => axios.get(array.url))
+      const pokemonDetails = await axios.all(pokemonDetailPromises);
       //Extracting importing thimgs from aobject and create antoher and store in array
       console.log(pokemonDetails)
-      const PokemonListResult= pokemonDetails.map((obj)=>{
-        const pokemon=obj.data;
-        return{
-            id:pokemon.id,
-            image:(pokemon.sprites.other)?pokemon.sprites.other.dream_world.front_default:pokemon.sprites.front_shiny,
-            name:pokemon.name,
-            types:pokemon.types,
+      const PokemonListResult = pokemonDetails.map((obj) => {
+        const pokemon = obj.data;
+        return {
+          id: pokemon.id,
+          image: (pokemon.sprites.other) ? pokemon.sprites.other.dream_world.front_default : pokemon.sprites.front_shiny,
+          name: pokemon.name,
+          types: pokemon.types,
         }
       });
-     setApiData(PokemonListResult)
-     setloading(false)
+      setApiData(PokemonListResult)
+      setloading(false)
     }
-    
-    getData()
-   },[ApiLink])
 
-    // Search filter
+    getData()
+  }, [ApiLink])
+
+  // Search filter
   const filteredPokemon = ApiData.filter((pokemon) =>
     pokemon.name.toLowerCase().includes(search.toLowerCase())
   );
 
-   // function set Previous and next url
-   const setUrl=(btn)=>{
-    if(btn==='Next'){
+  // function set Previous and next url
+  const setUrl = (btn) => {
+    if (btn === 'Next') {
       setApiLink(NextUrl);
     }
-    else{
-      if(PrevUrl!=null) setApiLink(PrevUrl)
+    else {
+      if (PrevUrl != null) setApiLink(PrevUrl)
     }
-   }
-   //loading Screen
-   if(loading){
-    return <Loading/>
-   }
- return (
+  }
+  //loading Screen
+  if (loading) {
+    return <Loading />
+  }
+  return (
     <>
-      <NavBar setActivePage={setActivePage} />
+      <NavBar s={search} sS={setSearch} setActivePage={setActivePage} />
       {activePage === 'home' && (
         <>
           <PokeDex PokeList={filteredPokemon} />
