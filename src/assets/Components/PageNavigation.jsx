@@ -1,6 +1,5 @@
 import React from 'react';
-import './PageNavigationcss.css'
-
+import "./PageNavigationcss.css";
 const PageNavigation = (props) => {
  return (
  <div className='btn'>

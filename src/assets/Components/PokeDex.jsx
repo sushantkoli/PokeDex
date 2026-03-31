@@ -1,5 +1,5 @@
 
-import Pokemoncard from './Pokemoncard';
+import Pokemoncard from "./Pokemoncard";
 
 
 const PokeDex = (props) => {

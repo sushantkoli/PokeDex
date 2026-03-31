@@ -1,8 +1,8 @@
-import { use, useState } from 'react'
+import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
-import './App.css'
-import PokeDex from './assets/Components/PokeDex'
+import './App.css';
+import PokeDex from './assets/Components/PokeDex';
 import PageNavigation from './assets/Components/PageNavigation';
 import Loading from './assets/Components/Loading';
 import NavBar from './assets/Components/NavBar';
@@ -14,18 +14,14 @@ function App() {
  const [NextUrl, setNextUrl]=useState(null)
  const [PrevUrl, setPrevUrl]=useState(null) 
  const [loading, setloading]=useState(false)
- const [search, setSearch] = useState("");
+ const [search] = useState("");
  const [activePage, setActivePage] = useState('home');
 
 
 
    useEffect(()=>{
-    
+    const getData= async ()=>{
       setloading(true)
-    getData()
-   },[ApiLink])
-
-      const getData= async ()=>{
       const response= await axios.get(ApiLink)
       //Stored Array of pokemon name and url
       const PokemResult=response.data.results
@@ -48,6 +44,9 @@ function App() {
      setApiData(PokemonListResult)
      setloading(false)
     }
+    
+    getData()
+   },[ApiLink])
 
     // Search filter
   const filteredPokemon = ApiData.filter((pokemon) =>

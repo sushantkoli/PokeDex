@@ -2,7 +2,7 @@
 
 const Loading = () => {
 return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
+    <div className="flex flex-col items-center justify-center h-screen bg-linear-to-br from-indigo-500 via-purple-500 to-pink-500">
       
       {/* Spinner */}
       <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin mb-6"></div>
