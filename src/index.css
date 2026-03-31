@@ -1,0 +1,9 @@
+@import "tailwindcss";
+#about{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 80px); /* Full viewport height minus nav bar */
+  background-color: #f0f4f8;
+  font-size:x-large;
+}
