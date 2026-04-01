@@ -7,6 +7,7 @@ import PageNavigation from './assets/Components/PageNavigation';
 import Loading from './assets/Components/Loading';
 import NavBar from './assets/Components/NavBar';
 import About from './assets/Components/About';
+import PokemonModal from './assets/Components/PokemonModal';
 
 function App() {
   const [ApiData, setApiData] = useState([]);
@@ -16,6 +17,7 @@ function App() {
   const [loading, setloading] = useState(false)
   const [search, setSearch] = useState("");
   const [activePage, setActivePage] = useState('home');
+  const [selectedPokemon, setSelectedPokemon] = useState(null);
 
 
 
@@ -39,6 +41,10 @@ function App() {
           image: (pokemon.sprites.other) ? pokemon.sprites.other.dream_world.front_default : pokemon.sprites.front_shiny,
           name: pokemon.name,
           types: pokemon.types,
+          height: pokemon.height,
+          weight: pokemon.weight,
+          abilities: pokemon.abilities,
+          stats: pokemon.stats,
         }
       });
       setApiData(PokemonListResult)
@@ -71,11 +77,16 @@ function App() {
       <NavBar s={search} sS={setSearch} setActivePage={setActivePage} />
       {activePage === 'home' && (
         <>
-          <PokeDex PokeList={filteredPokemon} />
+          <PokeDex PokeList={filteredPokemon} onPokemonClick={setSelectedPokemon} />
           <PageNavigation prevUrl={PrevUrl} click={setUrl} />
         </>
       )}
       {activePage === 'about' && <About />}
+
+      {/* Pokemon Details Modal Overlay */}
+      {selectedPokemon && (
+        <PokemonModal pokemon={selectedPokemon} onClose={() => setSelectedPokemon(null)} />
+      )}
     </>
   )
 }

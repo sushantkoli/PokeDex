@@ -10,7 +10,7 @@ const PokeDex = (props) => {
  {props.PokeList.map((obj, index) => {
           return (
             <Pokemoncard
-              key={index} id={obj.id} image={obj.image} name={obj.name} type={obj.types}  />
+              key={index} id={obj.id} image={obj.image} name={obj.name} type={obj.types} onClick={() => props.onPokemonClick && props.onPokemonClick(obj)}  />
   );
 })}
   

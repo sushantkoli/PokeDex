@@ -22,7 +22,7 @@ const Pokemoncard = (props) => {
   steel: 'bg-gray-500'
 };
  return (
- <div className=' border-4 rounded-2xl  h-93 w-70'>
+ <div className=' border-4 rounded-2xl  h-93 w-70 cursor-pointer overflow-hidden hover:scale-105 transition-transform duration-300 shadow-sm hover:shadow-xl' onClick={props.onClick}>
  <div className='rounded  h-7/10 w-full py-1 flex items-center justify-center object-cover'>
     <img className='h-full w-full rounded bg-[#f2f2f2] mx-1.5 ' src={props.image}/>
 
